@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace DH.Observer
@@ -23,8 +24,11 @@ namespace DH.Observer
 
         void CreateSubjectIfNotExist<SubjectType>()
         {
-            if(!subjects.ContainsKey(typeof(SubjectType)))
+            if (!subjects.ContainsKey(typeof(SubjectType)))
+            {
+                Debug.LogWarning("Subject type does not exist. Adding one - subject: " + typeof(SubjectType).Name);
                 subjects.Add(typeof(SubjectType), new Subject<SubjectType>());
+            }
         }
 
         public void Unsubscribe<SubjectType>(IObserver<SubjectType> observer)
